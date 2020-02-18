@@ -1,10 +1,65 @@
-.task_done{
-   text-decoration: line-through; 
+.task_done b{
+   text-decoration: line-through;
 }
-ul button{
+.task_done span{
+    color: #ccc; 
+}
+.todo_list button{
     background-color: transparent;
     border: none;
+    font-size: 20px;
+    text-align: top;
 }
-ul button:focus{
+
+.todo_list  button:focus{
     outline: none; 
+}
+.todo_list ul{
+    list-style-type: none;
+    padding: 0;
+}
+.todo_list li{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 10px;
+}
+.todo_list .set_done{
+    border: 1px solid #777;
+    width: 30px;
+    height: 30px;
+    border-radius: 2px;
+    color: transparent;
+}
+
+.todo_list .remove_task:hover{
+   color:#FA5858;
+}
+.todo_list .set_done:hover{
+    color: green;
+    font-size: 20px;
+}
+.todo_list form{
+    display: flex;
+    flex-direction: column;
+}
+.todo_list form button{
+color: skyblue;
+font-size: 25px;
+align-self: center;
+}
+.todo_list form button:hover{
+    color: green;
+}
+.todo_list form input{
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+}
+.todo_list form input:focus{
+    outline: none;
+    border-color: skyblue;
+}
+.todo_list form input:first-child{
+    margin-bottom: -2px;
 }
