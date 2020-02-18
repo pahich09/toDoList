@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './style.css'
 
 
 class App extends Component {
@@ -7,10 +8,10 @@ class App extends Component {
 
     this.state = {
       tasks: [
-        { id: Math.random(), title: 'Task #1' },
-        { id: Math.random(), title: 'Task #2' },
-        { id: Math.random(), title: 'Task #3' },
-        { id: Math.random(), title: 'Task #4' },
+        { id: Math.random(), title: 'Task #1', isDone: false },
+        { id: Math.random(), title: 'Task #2', isDone: false },
+        { id: Math.random(), title: 'Task #3', isDone: false },
+        { id: Math.random(), title: 'Task #4', isDone: false },
       ],
     };
     this.addNewTaskHendler = e => {
@@ -19,14 +20,19 @@ class App extends Component {
       this.setState({
         tasks: [
           ...this.state.tasks,
-          { id: Math.random(), title: e.target[0].value }
+          { id: Math.random(), title: e.target[0].value, isDone: false }
         ]
       })
       e.target[0].value = '';
     };
+    this.setTaskToDoneHandler = task_id => {
+      this.setState({
+        tasks: [
+          ...this.state.tasks.map(el => el.id == task_id ? { ...el, isDone: true } : el)
+        ]
+      })
+    }
   }
-
-
 
 
   render() {
@@ -44,7 +50,16 @@ class App extends Component {
         <div>
           <ul>
             {
-              tasks.map(el => <li key={el.id}>{el.title}</li>)
+              tasks.map(el => (
+                <li key={el.id} className={el.isDone ? 'task_done' : null
+                }>{el.title}
+                  {
+                    el.isDone ? null : <button onClick={
+                      () => { this.setTaskToDoneHandler(el.id) }
+                    }>Make done</button>
+                  }
+                </li>
+              ))
             }
           </ul>
         </div>
