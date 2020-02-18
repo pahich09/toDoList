@@ -1,3 +1,10 @@
 .task_done{
    text-decoration: line-through; 
 }
+ul button{
+    background-color: transparent;
+    border: none;
+}
+ul button:focus{
+    outline: none; 
+}

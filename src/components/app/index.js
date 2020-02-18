@@ -9,35 +9,37 @@ class App extends Component {
 
     this.state = {
       tasks: [
-        { id: Math.random(), title: 'Task #1', isDone: false },
-        { id: Math.random(), title: 'Task #2', isDone: false },
-        { id: Math.random(), title: 'Task #3', isDone: false },
-        { id: Math.random(), title: 'Task #4', isDone: false },
+        { id: Math.random(), title: 'Task #1', description: 'description Task#1', isDone: false },
+        { id: Math.random(), title: 'Task #2', description: 'description Task#2', isDone: false },
+        { id: Math.random(), title: 'Task #3', description: 'description Task#3', isDone: false },
+        { id: Math.random(), title: 'Task #4', description: 'description Task#4', isDone: false },
       ],
     };
     this.addNewTaskHendler = e => {
       e.preventDefault();
-      console.log(this.state.tasks)
-      this.setState({
-        tasks: [
-          ...this.state.tasks,
-          { id: Math.random(), title: e.target[0].value, isDone: false }
-        ]
-      })
+      this.setState(
+        e.target[0].value ?
+          {
+            tasks: [
+              ...this.state.tasks,
+              { id: Math.random(), title: e.target[0].value, description: e.target[1].value, isDone: false }
+            ]
+          } : null)
       e.target[0].value = '';
+      e.target[1].value = '';
     };
 
     this.setTaskToDoneHandler = task_id => {
       this.setState({
         tasks: [
-          ...this.state.tasks.map(el => el.id == task_id ? { ...el, isDone: true } : el)
+          ...this.state.tasks.map(el => el.id === task_id ? { ...el, isDone: true } : el)
         ]
       })
     }
     this.removeTaskHandler = task_id => {
       this.setState({
         tasks: [
-          ...this.state.tasks.filter(el => el.id != task_id)
+          ...this.state.tasks.filter(el => el.id !== task_id)
         ]
       })
     }
@@ -58,8 +60,9 @@ class App extends Component {
               onSubmit={this.addNewTaskHendler}
             >
               <input type="text" name="task" placeholder="Enter new task" />
-              <button type="submit">Add task</button>
-              <button type="button">Add descripton</button>
+              <input type="text" name="description" placeholder="Enter description" />
+              <Button variant="info">Add task</Button>
+
             </form>
           </Col>
           <Col xs={12}>
@@ -67,14 +70,12 @@ class App extends Component {
               {
                 tasks.map(el => (
                   <li key={el.id} className={el.isDone ? 'task_done' : null
-                  }>{el.title}
+                  }><b>{el.title}</b> <br />
+                    <span>{el.description}</span>
                     {
-                      el.isDone ? null : <button onClick={
+                      !el.isDone ? <button onClick={
                         () => { this.setTaskToDoneHandler(el.id) }
-                      }>Make done</button>
-                    }
-                    {
-                      <button onClick={
+                      }>Make done</button> : <button onClick={
                         () => { this.removeTaskHandler(el.id) }
                       }>Remove task</button>
                     }
@@ -84,7 +85,7 @@ class App extends Component {
             </ul>
           </Col>
         </Row>
-      </Container >
+      </Container>
 
     );
   }
