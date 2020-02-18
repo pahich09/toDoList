@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import './style.css'
+import './style.css';
+import { Button, Container, Row, Col } from 'react-bootstrap';
 
 
 class App extends Component {
@@ -25,6 +26,7 @@ class App extends Component {
       })
       e.target[0].value = '';
     };
+
     this.setTaskToDoneHandler = task_id => {
       this.setState({
         tasks: [
@@ -46,36 +48,44 @@ class App extends Component {
     const { tasks } = this.state;
 
     return (
-      <div className="">
-        <h1>Todo List App</h1>
-        <form
-          onSubmit={this.addNewTaskHendler}
-        >
-          <input type="text" name="task" placeholder="Enter new task" />
-          <button>Add task</button>
-        </form>
-        <div>
-          <ul>
-            {
-              tasks.map(el => (
-                <li key={el.id} className={el.isDone ? 'task_done' : null
-                }>{el.title}
-                  {
-                    el.isDone ? null : <button onClick={
-                      () => { this.setTaskToDoneHandler(el.id) }
-                    }>Make done</button>
-                  }
-                  {
-                    <button onClick={
-                      () => { this.removeTaskHandler(el.id) }
-                    }>Remove task</button>
-                  }
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-      </div>
+      <Container>
+        <Row>
+          <Col xs={12}>
+            <h1>Todo List App</h1>
+          </Col>
+          <Col xs={12}>
+            <form
+              onSubmit={this.addNewTaskHendler}
+            >
+              <input type="text" name="task" placeholder="Enter new task" />
+              <button type="submit">Add task</button>
+              <button type="button">Add descripton</button>
+            </form>
+          </Col>
+          <Col xs={12}>
+            <ul>
+              {
+                tasks.map(el => (
+                  <li key={el.id} className={el.isDone ? 'task_done' : null
+                  }>{el.title}
+                    {
+                      el.isDone ? null : <button onClick={
+                        () => { this.setTaskToDoneHandler(el.id) }
+                      }>Make done</button>
+                    }
+                    {
+                      <button onClick={
+                        () => { this.removeTaskHandler(el.id) }
+                      }>Remove task</button>
+                    }
+                  </li>
+                ))
+              }
+            </ul>
+          </Col>
+        </Row>
+      </Container >
+
     );
   }
 }
