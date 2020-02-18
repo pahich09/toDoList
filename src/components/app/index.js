@@ -32,6 +32,13 @@ class App extends Component {
         ]
       })
     }
+    this.removeTaskHandler = task_id => {
+      this.setState({
+        tasks: [
+          ...this.state.tasks.filter(el => el.id != task_id)
+        ]
+      })
+    }
   }
 
 
@@ -57,6 +64,11 @@ class App extends Component {
                     el.isDone ? null : <button onClick={
                       () => { this.setTaskToDoneHandler(el.id) }
                     }>Make done</button>
+                  }
+                  {
+                    <button onClick={
+                      () => { this.removeTaskHandler(el.id) }
+                    }>Remove task</button>
                   }
                 </li>
               ))
