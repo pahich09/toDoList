@@ -53,12 +53,12 @@ class App extends Component {
     return (
       <Container className="todo_list">
         <Row>
-          <Col xs={6}>
+          <Col md={6}>
             <h1 className="text-center">Todo List App</h1>
           </Col>
         </Row>
         <Row>
-          <Col xs={6}>
+          <Col md={6}>
             <form
               onSubmit={this.addNewTaskHendler}
             >
@@ -71,7 +71,7 @@ class App extends Component {
         </Row>
 
         <Row>
-          <Col xs={6}>
+          <Col md={6}>
             <ul>
               {
                 tasks.map((el, i) => (

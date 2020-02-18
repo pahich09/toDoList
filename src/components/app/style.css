@@ -1,6 +1,9 @@
 .task_done b{
    text-decoration: line-through;
 }
+.todo_list [class^='col']{
+    margin: 0 auto;
+} 
 .task_done span{
     color: #ccc; 
 }
